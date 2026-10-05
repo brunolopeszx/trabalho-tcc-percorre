@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#176b50">
+  <meta name="description" content="Encontre profissionais do seu bairro com praticidade no BairroFácil.">
+  <title>BairroFácil — serviços perto de você</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar"><div class="container"><span>📍 Serviços locais, pertinho de você</span><span>Valorize quem trabalha no seu bairro 💚</span></div></div>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="BairroFácil início"><span class="brand-mark">⌂</span><span>BairroFácil</span></a>
+      <nav class="navlinks"><a href="#servicos">Serviços</a><a href="#profissionais">Profissionais</a><a href="#como-funciona">Como funciona</a></nav>
+      <div class="nav-actions"><button class="btn btn-outline btn-small" onclick="openAuth('profissional')">Sou profissional</button><button class="btn btn-primary btn-small" onclick="openAuth('cliente')">Entrar / Cadastrar</button><button class="btn btn-soft btn-small mobile-menu" onclick="openAuth('cliente')">Entrar</button></div>
+    </div>
+  </header>
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> SUA REGIÃO, SEUS PROFISSIONAIS</div>
+          <h1>Precisou? Tem um profissional <em>perto de você.</em></h1>
+          <p>Encontre pessoas de confiança para cuidar da sua casa. Compare avaliações, conheça profissionais do bairro e peça seu orçamento sem complicação.</p>
+          <div class="searchbox">
+            <div class="search-field"><span class="icon">⌕</span><input id="heroSearch" placeholder="Qual serviço você precisa? Ex.: eletricista" aria-label="Qual serviço você precisa"></div>
+            <div class="search-field" style="max-width:190px"><span class="icon">⌖</span><input id="heroLocation" placeholder="Seu bairro" aria-label="Seu bairro"></div>
+            <button class="btn btn-primary" onclick="runSearch()">Buscar profissionais →</button>
+          </div>
+          <div class="hero-trust"><span>✓ Profissionais avaliados</span><span>✓ Compare opções</span><span>✓ Valorize seu bairro</span></div>
+        </div>
+        <div class="hero-visual" aria-label="Destaque de profissional">
+          <img src="Apresentação Startup Escolar.png" alt="" width="450">
+          <div class="hero-card"><div class="hero-card-top"><span>PROFISSIONAL EM DESTAQUE</span><span class="live">● Disponível</span></div><div class="mini-pro"><div class="avatar">👨‍🔧</div><div><h3>Marcos Oliveira</h3><p>Eletricista residencial</p><div class="stars">★ 4,9 <span style="color:#7a857e;font-weight:500">(127 avaliações)</span></div></div></div><div class="hero-card-bottom"><div><small style="color:#68756e">Serviços a partir de</small><br><strong>R$ 80</strong></div><button class="btn btn-primary btn-small" onclick="openProfile('marcos')">Ver perfil ↗</button></div></div>
+        </div>
+      </div>
+    </section>
+    <section id="servicos">
+      <div class="container"><div class="section-head"><div><div class="section-kicker">Encontre o que precisa</div><h2>Qual serviço você procura?</h2><p>Escolha uma categoria e encontre profissionais que atendem sua região.</p></div><a class="text-link" href="#profissionais">Ver profissionais →</a></div>
+        <div class="categories" id="categoryGrid">
+          <button class="category" data-category="Eletricista" onclick="selectCategory(this)"><span class="category-icon">⚡</span><strong>Eletricista</strong></button>
+          <button class="category" data-category="Encanador" onclick="selectCategory(this)"><span class="category-icon">🚰</span><strong>Encanador</strong></button>
+          <button class="category" data-category="Pedreiro" onclick="selectCategory(this)"><span class="category-icon">🧱</span><strong>Pedreiro</strong></button>
+          <button class="category" data-category="Pintor" onclick="selectCategory(this)"><span class="category-icon">🎨</span><strong>Pintor</strong></button>
+          <button class="category" data-category="Ar-condicionado" onclick="selectCategory(this)"><span class="category-icon">❄️</span><strong>Ar-condicionado</strong></button>
+          <button class="category" data-category="Montador de móveis" onclick="selectCategory(this)"><span class="category-icon">🪑</span><strong>Montador</strong></button>
+          <button class="category" data-category="Técnico de informática" onclick="selectCategory(this)"><span class="category-icon">💻</span><strong>Informática</strong></button>
+          <button class="category" data-category="Jardineiro" onclick="selectCategory(this)"><span class="category-icon">🌿</span><strong>Jardineiro</strong></button>
+        </div>
+      </div>
+    </section>
+    <section class="featured" id="profissionais">
+      <div class="container">
+        <div class="section-head"><div><div class="section-kicker">Gente de confiança</div><h2>Profissionais perto de você</h2><p>Conheça os profissionais, veja avaliações e solicite um orçamento.</p></div><span class="text-link" id="resultsCount">6 profissionais</span></div>
+        <div class="toolbar"><input id="filterSearch" placeholder="Buscar profissão ou nome..." oninput="renderProfessionals()"><input id="filterNeighborhood" placeholder="Bairro (ex.: Partenon)" oninput="renderProfessionals()"><select id="filterCategory" onchange="renderProfessionals()"><option value="">Todas as categorias</option><option>Eletricista</option><option>Encanador</option><option>Pedreiro</option><option>Pintor</option><option>Ar-condicionado</option><option>Montador de móveis</option><option>Técnico de informática</option><option>Jardineiro</option></select><select id="filterRating" onchange="renderProfessionals()"><option value="0">Todas as avaliações</option><option value="4.8">4,8 estrelas ou mais</option><option value="4.5">4,5 estrelas ou mais</option></select><select id="filterSort" onchange="renderProfessionals()"><option value="rating">Melhor avaliados</option><option value="price">Menor preço</option><option value="name">Nome A–Z</option></select></div>
+        <div class="pro-grid" id="professionalGrid"></div>
+      </div>
+    </section>
+    <section id="como-funciona">
+      <div class="container"><div class="section-head"><div><div class="section-kicker">Simples assim</div><h2>Resolver ficou mais fácil.</h2><p>Do primeiro clique até encontrar alguém para fazer o serviço.</p></div></div>
+        <div class="how-grid"><article class="step"><div class="step-num">01</div><h3>🔎 Encontre</h3><p>Escolha o tipo de serviço e informe seu bairro para descobrir profissionais que atendem perto de você.</p></article><article class="step"><div class="step-num">02</div><h3>⭐ Compare</h3><p>Confira perfis, experiência, avaliações de clientes e preços para decidir com tranquilidade.</p></article><article class="step"><div class="step-num">03</div><h3>🤝 Combine</h3><p>Conte o que precisa, solicite um orçamento e combine os detalhes diretamente com o profissional.</p></article></div>
+      </div>
+    </section>
+    <section class="local-banner"><div class="container"><div class="banner-box"><div><h2>Você também trabalha por conta própria?</h2><p>Mostre seu trabalho para pessoas da sua região, crie seu perfil e tenha mais oportunidades de conseguir novos clientes.</p></div><button class="btn" onclick="openAuth('profissional')">Quero ser um profissional →</button></div></div></section>
+  </main>
+  <footer><div class="container footer-inner"><div><a class="brand" href="#inicio"><span class="brand-mark">⌂</span><span>BairroFácil</span></a><p>Conectando vizinhos a profissionais locais. 💚</p></div><div class="footer-links"><a href="#servicos">Serviços</a><a href="#como-funciona">Como funciona</a><a href="#" onclick="openAuth('profissional');return false">Seja profissional</a></div><p>© <span id="year"></span> BairroFácil · Projeto demonstrativo</p></div></footer>
+  <nav class="mobile-nav"><button onclick="location.href='#inicio'"><span>⌂</span>Início</button><button onclick="location.href='#servicos'"><span>▦</span>Serviços</button><button onclick="location.href='#profissionais'"><span>⌕</span>Buscar</button><button onclick="openDashboard()"><span>♙</span>Minha área</button></nav>
+  <div class="modal-backdrop" id="modalBackdrop" onclick="backdropClose(event)"><div class="modal" id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" onclick="closeModal()" aria-label="Fechar">×</button><div id="modalInner"></div></div></div>
+  <div class="toast" id="toast"></div>
+</body>
+</html>
